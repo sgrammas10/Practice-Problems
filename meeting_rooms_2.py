@@ -1,19 +1,37 @@
 def min_meeting_rooms(intervals: list[list[int]]) -> int:
-    start =[]
-    end= []
-    max_rooms = 0
-    start = sorted(iv[0] for iv in intervals)
-    end = sorted(iv[1] for iv in intervals)
-    s = 0
-    e = 0
+    start = []
+    for i in range(len(intervals)):
+        start.append(intervals[i][0])
+    start.sort()
+
+    end = []
+    for i in range(len(intervals)):
+        end.append(intervals[i][1])
+    end.sort()
+
+    i = 0
+    j=0
     rooms = 0
-    while s < len(intervals):
-        if start[s] < end[e]:
-            rooms += 1
-            s += 1
-        else: 
-            rooms -= 1
-            e +=1
+    max_rooms = 0
+    
+    print(start)
+    print(end)
+    # if len(intervals) == 1:
+    #     return 1
+    while i < len(intervals):
+        if start[i] < end[j]:
+            i += 1
+            rooms +=1
+        elif start[i] == end[j]:
+            i+=1
+            j+=1
+        else:
+            j+=1
+            rooms -=1
+        
+        # elif start[i] > end[i]:
+        #     j+=1
+        #     rooms -=1
         max_rooms = max(max_rooms, rooms)
     return max_rooms
         
