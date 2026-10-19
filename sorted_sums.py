@@ -1,6 +1,6 @@
 import bisect
 
-def sorted_sums(a: list[int]) -> int:
+def sorted_sums_without_bisect(a: list[int]) -> int:
     MOD = 10**9 +7
     sum = 0
     ongoing = []
@@ -9,6 +9,16 @@ def sorted_sums(a: list[int]) -> int:
         for j, num in enumerate(ongoing):
 
             sum += num*(j+1)
+    return sum%MOD
+
+def sorted_sums(a: list[int]) -> int:
+    MOD = 10**9 +7
+    sum = 0
+    ongoing = []
+    for x in a:
+        bisect.insort(ongoing, x)
+        for i, num in enumerate(ongoing):
+            sum += num*(i+1)
     return sum%MOD
 
 
